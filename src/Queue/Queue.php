@@ -1,10 +1,8 @@
 <?php
 
-namespace Opifer\QueueIt;
+namespace Opifer\QueueIt\Queue;
 
-//require_once('IQueue.php');
-
-class Queue implements IQueue
+class Queue implements QueueInterface
 {
 	private $customerId;
 	private $eventId;

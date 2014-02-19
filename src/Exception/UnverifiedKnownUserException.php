@@ -1,9 +1,7 @@
 <?php
 
-namespace Opifer\QueueIt;
+namespace Opifer\QueueIt\Exception;
 
-//require_once('KnownUserException.php');
-	
 class UnverifiedKnownUserException extends KnownUserException
 {
 

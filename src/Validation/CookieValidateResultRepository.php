@@ -1,13 +1,11 @@
 <?php
 
-namespace Opifer\QueueIt;
+namespace Opifer\QueueIt\Validation;
 
-// use IValidateResultRepository;
-// use ValidateResultRepositoryBase;
-// use AcceptedConfirmedResult;
-// use Md5KnownUser;
-// use Queue;
-// use IQueue;
+use Opifer\QueueIt\Exception\InvalidKnownUserUrlException;
+use Opifer\QueueIt\Validation\AcceptedConfirmedResult;
+use Opifer\QueueIt\KnownUser\Md5KnownUser;
+use Opifer\QueueIt\KnownUser\KnownUserFactory;
 
 class CookieValidateResultRepository extends ValidateResultRepositoryBase
 {
@@ -71,16 +69,17 @@ class CookieValidateResultRepository extends ValidateResultRepositoryBase
 				$parsedTimeStamp->setTimestamp(intval($timeStamp));
 				
 				return new AcceptedConfirmedResult(
-						$queue, 
-						new Md5KnownUser(
-								$queueId, 
-								$placeInQueue, 
-								$parsedTimeStamp, 
-								$queue->getCustomerId(), 
-								$queue->getEventId(), 
-								$redirectType, 
-								$originalUrl), 
-						false);
+					$queue, 
+					new Md5KnownUser(
+							$queueId, 
+							$placeInQueue, 
+							$parsedTimeStamp, 
+							$queue->getCustomerId(), 
+							$queue->getEventId(), 
+							$redirectType, 
+							$originalUrl), 
+					false
+				);
 			}
 			catch (InvalidKnownUserUrlException $e)
 			{

@@ -1,8 +1,8 @@
 <?php
 
-namespace Opifer\QueueIt;
+namespace Opifer\QueueIt\KnownUser;
 
-interface IKnownUserUrlProvider
+interface KnownUserUrlProviderInterface
 {
 	public function GetUrl();
 	public function getQueueId($queryStringPrefix);

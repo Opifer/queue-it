@@ -1,12 +1,11 @@
 <?php
 
-namespace Opifer\QueueIt;
-
-// require_once('Queue.php');
-// require_once('ConfigurationErrorsException.php');
-require_once('CurrentUrl.php');
+namespace Opifer\QueueIt\Queue;
 
 use InvalidArgumentException;
+use Opifer\QueueIt\Exception\ConfigurationErrorsException;
+
+require_once('CurrentUrl.php');
 
 class QueueFactory
 {
@@ -74,14 +73,15 @@ class QueueFactory
 			$domainAlias = $eventId . '-' . $customerId . '.' . $domain;
 			
 		return new Queue(
-				$customerId, 
-				$eventId, 
-				$domainAlias, 
-				$landingPage, 
-				$sslEnabled, 
-				$includeTargetUrl,
-				$language,
-				$layoutName);
+			$customerId, 
+			$eventId, 
+			$domainAlias, 
+			$landingPage, 
+			$sslEnabled, 
+			$includeTargetUrl,
+			$language,
+			$layoutName
+		);
 	}
 }
 

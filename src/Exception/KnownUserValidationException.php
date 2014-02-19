@@ -1,8 +1,6 @@
 <?php
 
-namespace Opifer\QueueIt;
-
-//require_once('SessionValidationException.php');
+namespace Opifer\QueueIt\Exception;
 
 class KnownUserValidationException extends SessionValidationException
 {

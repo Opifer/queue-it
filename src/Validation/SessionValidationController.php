@@ -1,16 +1,15 @@
 <?php
 
-namespace Opifer\QueueIt;
+namespace Opifer\QueueIt\Validation;
 
-// require_once('KnownUserFactory.php');
-// require_once('QueueFactory.php');
-// require_once('AcceptedConfirmedResult.php');
-// require_once('EnqueueResult.php');
-// require_once('KnownUserValidationException.php');
-// require_once('ExpiredValidationException.php');
-// require_once('InvalidKnownUserUrlException.php');
-// require_once('InvalidKnownUserHashException.php');
-// require_once('CookieValidateResultRepository.php');
+use InvalidArgumentException;
+
+use Opifer\QueueIt\KnownUser\KnownUserFactory;
+use Opifer\QueueIt\Queue\QueueFactory;
+use Opifer\QueueIt\Exception\KnownUserValidationException;
+use Opifer\QueueIt\Exception\ExpiredValidationException;
+use Opifer\QueueIt\Exception\InvalidKnownUserUrlException;
+use Opifer\QueueIt\Exception\InvalidKnownUserHashException;
 
 class SessionValidationController
 {

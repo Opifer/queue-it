@@ -1,9 +1,8 @@
 <?php
 
-namespace Opifer\QueueIt;
+namespace Opifer\QueueIt\Exception;
 
 class ConfigurationErrorsException extends \Exception
 {
 	
 }
-?>

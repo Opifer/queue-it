@@ -1,8 +1,6 @@
 <?php
 
-namespace Opifer\QueueIt;
-
-//require_once('KnownUserException.php');
+namespace Opifer\QueueIt\Exception;
 
 class InvalidKnownUserUrlException extends KnownUserException
 {

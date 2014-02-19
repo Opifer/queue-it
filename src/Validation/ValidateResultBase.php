@@ -1,10 +1,8 @@
 <?php
 
-namespace Opifer\QueueIt;
+namespace Opifer\QueueIt\Validation;
 
-//require_once('IValidateResult.php');
-
-class ValidateResultBase implements IValidateResult
+class ValidateResultBase implements ValidateResultInterface
 {
 	private $queue;
 	

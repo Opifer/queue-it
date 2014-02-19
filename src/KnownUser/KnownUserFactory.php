@@ -1,16 +1,15 @@
 <?php
 
-namespace Opifer\QueueIt;
-
-// require_once('DefaultKnownUserUrlProvider.php');
-// require_once('KnownUserException.php');
-// require_once('InvalidKnownUserHashException.php');
-// require_once('InvalidKnownUserUrlException.php');
-// require_once('Md5KnownUser.php');
-// require_once('RedirectType.php');
-require_once('Guid.php');
+namespace Opifer\QueueIt\KnownUser;
 
 use InvalidArgumentException, DateTime, DateTimeZone;
+
+use Opifer\QueueIt\Redirect\RedirectType;
+use Opifer\QueueIt\Exception\KnownUserException;
+use Opifer\QueueIt\Exception\InvalidKnownUserHashException;
+use Opifer\QueueIt\Exception\InvalidKnownUserUrlException;
+
+require_once('Guid.php');
 
 class KnownUserFactory
 {
@@ -81,7 +80,7 @@ class KnownUserFactory
 			$queryStringPrefix = $defaultQueryStringPrefix;
 
 		if ($secretKey == null)
-			throw new InvalidArgumentException("Secret key is null");
+			throw new \InvalidArgumentException("Secret key is null");
 		
 		try {
 			if ($urlProvider->getQueueId($queryStringPrefix) == null && $urlProvider->getPlaceInQueue($queryStringPrefix) == null && $urlProvider->getTimeStamp($queryStringPrefix) == null)
@@ -158,7 +157,7 @@ class KnownUserFactory
 		$actualhash = md5(utf8_encode($urlNoHash));
 
 		if (strcmp($actualhash, $expectedHash) != 0) {
-			throw new invalidKnownUserHashException('The hash of the request is invalid');
+			throw new InvalidKnownUserHashException('The hash of the request is invalid');
 		}
 	}	
 }

@@ -1,8 +1,8 @@
 <?php
 
-namespace Opifer\QueueIt;
+namespace Opifer\QueueIt\Queue;
 
-interface IQueue
+interface QueueInterface
 {
 	public function getEventId();
 	public function getCustomerId();

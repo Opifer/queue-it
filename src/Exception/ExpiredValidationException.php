@@ -1,17 +1,10 @@
 <?php
 
-namespace Opifer\QueueIt;
-
-//require_once('SessionValidationException.php');
+namespace Opifer\QueueIt\Exception;
 
 class ExpiredValidationException extends SessionValidationException
 {
 	private $knownUser;
-	
-	function getKnownUser()
-	{
-		return $this->knownUser;
-	}
 	
 	public function __construct($queue, $knownUser)
 	{
@@ -20,4 +13,8 @@ class ExpiredValidationException extends SessionValidationException
 		$this->knownUser = $knownUser;
 	}
 	
+	function getKnownUser()
+	{
+		return $this->knownUser;
+	}
 }

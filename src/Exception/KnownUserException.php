@@ -1,10 +1,6 @@
 <?php
 
-namespace Opifer\QueueIt;
-
-use QueueIT\Security\DefaultKnownUserUrlProvider;
-
-//require_once('DefaultKnownUserUrlProvider.php');
+namespace Opifer\QueueIt\Exception;
 
 class KnownUserException extends \Exception
 {
@@ -28,7 +24,6 @@ class KnownUserException extends \Exception
 	
 	public function getValidationUrl()
 	{
-
 		return $this->validationUrl;
 	}
 }

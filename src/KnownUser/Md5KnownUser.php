@@ -1,10 +1,8 @@
 <?php
 
-namespace Opifer\QueueIt;
+namespace Opifer\QueueIt\KnownUser;
 
-//require_once('IKnownUser.php');
-
-class Md5KnownUser implements IKnownUser
+class Md5KnownUser implements KnownUserInterface
 {
 	private $queueId;
 	private $placeInQueue;
@@ -13,6 +11,17 @@ class Md5KnownUser implements IKnownUser
 	private $eventId;
 	private $url;
 	private $originalUrl;
+	
+	public function __construct($queueId, $placeInQueue, $timestamp, $customerId, $eventId, $redirectType, $originalUrl)
+	{
+		$this->queueId = $queueId;
+		$this->placeInQueue = $placeInQueue;
+		$this->timeStamp = $timestamp;
+		$this->customerId = $customerId;
+		$this->eventId = $eventId;
+		$this->redirectType = $redirectType;
+		$this->originalUrl = $originalUrl;
+	}
 	
 	public function getQueueId()
 	{
@@ -49,16 +58,5 @@ class Md5KnownUser implements IKnownUser
 	public function getOriginalUrl()
 	{
 		return $this->originalUrl;		
-	}
-
-	public function __construct($queueId, $placeInQueue, $timestamp, $customerId, $eventId, $redirectType, $originalUrl)
-	{
-		$this->queueId = $queueId;
-		$this->placeInQueue = $placeInQueue;
-		$this->timeStamp = $timestamp;
-		$this->customerId = $customerId;
-		$this->eventId = $eventId;
-		$this->redirectType = $redirectType;
-		$this->originalUrl = $originalUrl;
 	}
 }

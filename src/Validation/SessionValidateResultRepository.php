@@ -1,13 +1,6 @@
 <?php
 
-namespace Opifer\QueueIt;
-
-// require_once('IValidateResultRepository.php');
-// require_once('ValidateResultRepositoryBase.php');
-// require_once('AcceptedConfirmedResult.php');
-// require_once('Md5KnownUser.php');
-// require_once('Queue.php');
-// require_once('IQueue.php');
+namespace Opifer\QueueIt\Validation;
 
 class SessionValidateResultRepository extends ValidateResultRepositoryBase
 {

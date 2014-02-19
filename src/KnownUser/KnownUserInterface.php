@@ -1,8 +1,8 @@
 <?php
 
-namespace Opifer\QueueIt;
+namespace Opifer\QueueIt\KnownUser;
 
-interface IKnownUser
+interface KnownUserInterface
 {
 	public function getQueueId();
 	public function getPlaceInQueue();

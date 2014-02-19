@@ -1,11 +1,10 @@
 <?php
 
-namespace Opifer\QueueIt;
+namespace Opifer\QueueIt\KnownUser;
 
-// require_once('IKnownUserUrlProvider.php');
 require_once('CurrentUrl.php');
 
-class DefaultKnownUserUrlProvider implements IKnownUserUrlProvider
+class DefaultKnownUserUrlProvider implements KnownUserUrlProviderInterface
 {
 	public function getUrl()
 	{
