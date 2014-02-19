@@ -1,7 +1,7 @@
 Queue-it
 ========
 
-A port of the QueueIT/Security-Php package.
+A port of the [QueueIT/Security-Php](https://github.com/queueit/QueueIT.Security-Php) package.
 
 Documentation
 -------------
