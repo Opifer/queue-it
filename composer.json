@@ -1,6 +1,6 @@
 {
     "name": "opifer/queue-it",
-    "description": "",
+    "description": "A modified version of queueit/QueueIT.Security-Php",
     "homepage": "https://github.com/Opifer/queue-it",
     "type": "library",
     "authors": [
