@@ -5,7 +5,7 @@ namespace Opifer\QueueIt\Queue;
 use InvalidArgumentException;
 use Opifer\QueueIt\Exception\ConfigurationErrorsException;
 
-require_once('CurrentUrl.php');
+require_once('../CurrentUrl.php');
 
 class QueueFactory
 {

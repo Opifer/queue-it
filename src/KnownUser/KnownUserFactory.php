@@ -9,7 +9,7 @@ use Opifer\QueueIt\Exception\KnownUserException;
 use Opifer\QueueIt\Exception\InvalidKnownUserHashException;
 use Opifer\QueueIt\Exception\InvalidKnownUserUrlException;
 
-require_once('Guid.php');
+require_once('../Guid.php');
 
 class KnownUserFactory
 {

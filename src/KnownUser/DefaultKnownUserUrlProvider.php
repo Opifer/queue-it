@@ -2,7 +2,7 @@
 
 namespace Opifer\QueueIt\KnownUser;
 
-require_once('CurrentUrl.php');
+require_once('../CurrentUrl.php');
 
 class DefaultKnownUserUrlProvider implements KnownUserUrlProviderInterface
 {
