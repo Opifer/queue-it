@@ -1,0 +1,22 @@
+{
+    "name": "opifer/queue-it",
+    "description": "",
+    "homepage": "https://github.com/Opifer/queue-it",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Rick van Laarhoven",
+            "email": "r.vanlaarhoven@opifer.nl",
+            "homepage": "http://opifer.nl"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~3.7.0"
+    },
+    "autoload": {
+        "psr-4": {"Opifer\\QueueIt\\": "src/"}
+    }
+}
