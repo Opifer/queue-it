@@ -9,7 +9,7 @@ use Opifer\QueueIt\Exception\KnownUserException;
 use Opifer\QueueIt\Exception\InvalidKnownUserHashException;
 use Opifer\QueueIt\Exception\InvalidKnownUserUrlException;
 
-require_once('../Guid.php');
+require_once(dirname(__FILE__).'/../Guid.php');
 
 class KnownUserFactory
 {
@@ -28,7 +28,7 @@ class KnownUserFactory
 		if (!$loadConfiguration)
 			return;
 		
-		$iniFileName = $_SERVER['DOCUMENT_ROOT'] . "\queueit.ini";
+		$iniFileName = $_SERVER['DOCUMENT_ROOT'] . "/queueit.ini";
 		
 		if (!file_exists($iniFileName))
 			return;

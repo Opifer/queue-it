@@ -1,7 +1,5 @@
 <?php
 
-namespace Opifer\QueueIt;
-
 function currentUrl()
 {
 	$ssl = isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] == "on";

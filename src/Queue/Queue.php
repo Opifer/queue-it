@@ -2,6 +2,8 @@
 
 namespace Opifer\QueueIt\Queue;
 
+require_once(dirname(__FILE__).'/../CurrentUrl.php');
+
 class Queue implements QueueInterface
 {
 	private $customerId;

@@ -5,7 +5,7 @@ namespace Opifer\QueueIt\Queue;
 use InvalidArgumentException;
 use Opifer\QueueIt\Exception\ConfigurationErrorsException;
 
-require_once('../CurrentUrl.php');
+require_once(dirname(__FILE__).'/../CurrentUrl.php');
 
 class QueueFactory
 {
@@ -31,7 +31,7 @@ class QueueFactory
 		if ($queueName == null)
 			throw new InvalidArgumentException('Queue Name cannot be null or empty');
 		
-		$iniFileName = $_SERVER['DOCUMENT_ROOT'] . "\queueit.ini";
+		$iniFileName = $_SERVER['DOCUMENT_ROOT'] . "/queueit.ini";
 		
 		if (!file_exists($iniFileName))
 			throw new ConfigurationErrorsException('Configuration file "' . $iniFileName . '" is missing');
