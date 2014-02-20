@@ -2,13 +2,20 @@
 
 namespace Opifer\QueueIt\KnownUser;
 
-require_once(dirname(__FILE__).'/../CurrentUrl.php');
+use Opifer\QueueIt\Identifier\Identifier;
 
 class DefaultKnownUserUrlProvider implements KnownUserUrlProviderInterface
 {
+	/**
+	 * Get URL
+	 *
+	 * @return  string
+	 */
 	public function getUrl()
 	{
-		return currentUrl();
+		$identifier = new Identifier;
+
+		return $identifier->currentUrl();
 	}
 	
 	public function getQueueId($queryStringPrefix)
@@ -52,6 +59,7 @@ class DefaultKnownUserUrlProvider implements KnownUserUrlProviderInterface
 	
 		return $this->getVar($key);
 	}
+	
 	public function getOriginalUrl($queryStringPrefix)
 	{
 		$url = $this->getUrl();
@@ -63,7 +71,8 @@ class DefaultKnownUserUrlProvider implements KnownUserUrlProviderInterface
 		$url = preg_replace("/([\?&])(" . $queryStringPrefix . "e=[^&]*&?)/i", "$1", $url);
 		$url = preg_replace("/([\?&])(" . $queryStringPrefix . "rt=[^&]*&?)/i", "$1", $url);
 		$url = preg_replace("/([\?&])(" . $queryStringPrefix . "h=[^&]*&?)/i", "$1", $url);
-				$url = preg_replace("/[\?&]$/", "", $url);		
+		$url = preg_replace("/[\?&]$/", "", $url);		
+		
 		return $url;
 	}
 	

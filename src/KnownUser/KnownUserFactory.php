@@ -8,8 +8,7 @@ use Opifer\QueueIt\Redirect\RedirectType;
 use Opifer\QueueIt\Exception\KnownUserException;
 use Opifer\QueueIt\Exception\InvalidKnownUserHashException;
 use Opifer\QueueIt\Exception\InvalidKnownUserUrlException;
-
-require_once(dirname(__FILE__).'/../Guid.php');
+use Opifer\QueueIt\Identifier\Identifier;
 
 class KnownUserFactory
 {
@@ -17,6 +16,13 @@ class KnownUserFactory
 	private static $defaultSecretKey;
 	private static $defaultUrlProviderFactory;
 	
+	/**
+	 * Reset
+	 *
+	 * @param   boolean  $loadConfiguration
+	 *
+	 * @return  void
+	 */
 	static function reset($loadConfiguration = false)
 	{
 		global $defaultQueryStringPrefix, $defaultSecretKey, $defaultUrlProviderFactory;
@@ -92,13 +98,14 @@ class KnownUserFactory
 			KnownUserFactory::verifyUrl($urlProvider->getUrl(), $secretKey);
 			
 			return new Md5KnownUser(
-					$urlProvider->getQueueId($queryStringPrefix), 
-					KnownUserFactory::decryptPlaceInQueue($urlProvider->getPlaceInQueue($queryStringPrefix)),
-					KnownUserFactory::decodeTimestamp($urlProvider->getTimeStamp($queryStringPrefix)),
-					$urlProvider->getCustomerId($queryStringPrefix),
-					$urlProvider->getEventId($queryStringPrefix),
-					KnownUserFactory::decodeRedirectType($urlProvider->getRedirectType($queryStringPrefix)),
-					$urlProvider->getOriginalUrl($queryStringPrefix));
+				$urlProvider->getQueueId($queryStringPrefix), 
+				KnownUserFactory::decryptPlaceInQueue($urlProvider->getPlaceInQueue($queryStringPrefix)),
+				KnownUserFactory::decodeTimestamp($urlProvider->getTimeStamp($queryStringPrefix)),
+				$urlProvider->getCustomerId($queryStringPrefix),
+				$urlProvider->getEventId($queryStringPrefix),
+				KnownUserFactory::decodeRedirectType($urlProvider->getRedirectType($queryStringPrefix)),
+				$urlProvider->getOriginalUrl($queryStringPrefix)
+			);
 		} catch (KnownUserException $e) {
 			$e->setValidationUrl($urlProvider->getUrl());
 			$e->setOriginalUrl($urlProvider->getOriginalUrl($queryStringPrefix));
@@ -108,8 +115,7 @@ class KnownUserFactory
 	
 	private static function decodeTimestamp($timestamp)
 	{	
-		if ($timestamp != null && is_numeric($timestamp))
-		{		
+		if ($timestamp != null && is_numeric($timestamp)) {		
 			$date = new DateTime("now", new DateTimeZone("UTC"));
 			$date->setTimestamp(intval($timestamp));
 			
@@ -136,7 +142,8 @@ class KnownUserFactory
 	
 	public static function encryptPlaceInQueue($placeInQueue)
 	{
-		$encryptedPlaceInQueue = guid();
+		$identifier = new Identifier();
+		$encryptedPlaceInQueue = $identifier->guid();
 		
 		$paddedPlaceInQueue = str_pad($placeInQueue, 7, "0", STR_PAD_LEFT);
 		
@@ -150,6 +157,7 @@ class KnownUserFactory
 		
 		return $encryptedPlaceInQueue;
 	}
+	
 	private static function verifyUrl($url, $sharedEventKey)
 	{
 		$expectedHash = substr($url, -32);
