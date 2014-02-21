@@ -55,6 +55,15 @@ class KnownUserFactory
 			$defaultQueryStringPrefix = $settings['queryStringPrefix'];	
 	}
 
+	/**
+	 * Configure
+	 *
+	 * @param   [type]  $sharedEventKey
+	 * @param   [type]  $urlProviderFactory
+	 * @param   [type]  $querystringPrefix
+	 *
+	 * @return  [type]
+	 */
 	static function configure($sharedEventKey = null, $urlProviderFactory = null, $querystringPrefix = null)
 	{
 		global $defaultQueryStringPrefix, $defaultSecretKey, $defaultUrlProviderFactory;
@@ -66,7 +75,12 @@ class KnownUserFactory
 		if ($querystringPrefix != null)
 			$defaultQueryStringPrefix = $querystringPrefix;
 	}	
-		
+	
+	/**
+	 * Get secret key
+	 *
+	 * @return  string
+	 */
 	public static function getSecretKey()
 	{
 		global $defaultSecretKey;
@@ -74,6 +88,19 @@ class KnownUserFactory
 		return $defaultSecretKey;
 	}
 	
+	/**
+	 * Verify MD5 Hash
+	 *
+	 * @param   string  					   $secretKey
+	 * @param   KnownUserUrlProviderInterface  $urlProvider
+	 * @param   string  					   $queryStringPrefix
+	 *
+	 * @throws  InvalidArgumentException if $secretKey is null
+	 * @throws  InvalidKnownUserUrlException
+	 * @throws  KnownUserException
+	 *
+	 * @return  Md5KnownUser
+	 */
 	public static function verifyMd5Hash($secretKey = null, $urlProvider = null, $queryStringPrefix = null)
 	{
 		global $defaultQueryStringPrefix, $defaultSecretKey, $defaultUrlProviderFactory;
@@ -113,6 +140,16 @@ class KnownUserFactory
 		}
 	}
 	
+	/**
+	 * decode Timestamp
+	 *
+	 * @param   integer  $timestamp
+	 *
+	 * @throws  InvalidKnownUserUrlException  if $timestamp is not an integer
+	 *          							  or is null.
+	 *
+	 * @return  DateTime
+	 */
 	private static function decodeTimestamp($timestamp)
 	{	
 		if ($timestamp != null && is_numeric($timestamp)) {		
@@ -125,11 +162,27 @@ class KnownUserFactory
 		throw new InvalidKnownUserUrlException();
 	}
 	
+	/**
+	 * Decode redirect type
+	 *
+	 * @param   RedirectType  $redirectType
+	 *
+	 * @return  RedirectType
+	 */
 	private static function decodeRedirectType($redirectType)
 	{
 		return RedirectType::FromString($redirectType);
 	}
 	
+	/**
+	 * Decrypt place-in-queue
+	 *
+	 * @param   string  $encryptedPlaceInQueue
+	 *
+	 * @throws  InvalidKnownUserUrlException
+	 *
+	 * @return  integer
+	 */
 	public static function decryptPlaceInQueue($encryptedPlaceInQueue)
 	{
 		if ($encryptedPlaceInQueue == null || strlen($encryptedPlaceInQueue) != 36)
@@ -137,9 +190,17 @@ class KnownUserFactory
 		
 		$e = $encryptedPlaceInQueue;
 		$p = substr($e,30,1).substr($e,3,1).substr($e,11,1).substr($e,20,1).substr($e,7,1).substr($e,26,1).substr($e,9,1); //uses one char of each string at a given starting point
+		
 		return (int)$p;
 	}
 	
+	/**
+	 * Encrypt place-in-queue
+	 *
+	 * @param   integer  $placeInQueue
+	 *
+	 * @return  string
+	 */
 	public static function encryptPlaceInQueue($placeInQueue)
 	{
 		$identifier = new Identifier();
@@ -158,6 +219,16 @@ class KnownUserFactory
 		return $encryptedPlaceInQueue;
 	}
 	
+	/**
+	 * Verify URL
+	 *
+	 * @param   string  $url
+	 * @param   [type]  $sharedEventKey
+	 *
+	 * @throws  InvalidKnownUserHashException  when hash could not be verified
+	 *
+	 * @return  void
+	 */
 	private static function verifyUrl($url, $sharedEventKey)
 	{
 		$expectedHash = substr($url, -32);

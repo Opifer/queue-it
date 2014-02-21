@@ -10,7 +10,14 @@ class RedirectType
 	const AfterEvent = 3;
 	const Disabled = 4;
 	const DirectLink = 5;
-  
+  	
+  	/**
+  	 * From string
+  	 *
+  	 * @param   string  $value
+  	 *
+  	 * @return  integer
+  	 */
 	static function FromString($value)
 	{
 		if ($value == null)

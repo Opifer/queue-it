@@ -9,6 +9,13 @@ use Opifer\QueueIt\KnownUser\KnownUserFactory;
 
 class CookieValidateResultRepository extends ValidateResultRepositoryBase
 {
+	/**
+	 * Reset
+	 *
+	 * @param   boolean  $loadConfiguration
+	 *
+	 * @return  [type]
+	 */
 	static function reset($loadConfiguration = false)
 	{
 		global $cookieDomain;
@@ -89,7 +96,6 @@ class CookieValidateResultRepository extends ValidateResultRepositoryBase
 		}
 
 		return $result;
-
 	}
 
 	public function setValidationResult($queue, $validationResult)

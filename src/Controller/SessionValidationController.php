@@ -19,6 +19,13 @@ class SessionValidationController
     private static $defaultTicketExpiration;
     private static $resultProviderFactory;
     
+    /**
+     * Reset
+     *
+     * @param   boolean  $loadConfiguration
+     *
+     * @return  void
+     */
     static function reset($loadConfiguration = false)
     {
         global $resultProviderFactory, $defaultTicketExpiration;
@@ -48,6 +55,14 @@ class SessionValidationController
             $defaultSecretKey = intval($settings['ticketExpiration']);
     }
     
+    /**
+     * Configure
+     *
+     * @param   [type]  $ticketExpiration
+     * @param   [type]  $validationResultProviderFactory
+     *
+     * @return  void
+     */
     static function configure($ticketExpiration = null, $validationResultProviderFactory = null)
     {
         global $resultProviderFactory, $defaultTicketExpiration;
@@ -58,6 +73,18 @@ class SessionValidationController
             $resultProviderFactory = $validationResultProviderFactory;
     }
     
+    /**
+     * Validates a request from configuration
+     *
+     * @param   string   $queueName
+     * @param   boolean  $includeTargetUrl
+     * @param   boolean  $sslEnabled
+     * @param   string   $domainAlias
+     * @param   string   $language
+     * @param   string   $layoutName
+     *
+     * @return  [type]
+     */
     static function validateRequestFromConfiguration($queueName = 'default', $includeTargetUrl = null, $sslEnabled = null, $domainAlias = null, $language = null, $layoutName = null)
     {
         if ($queueName == null)
@@ -68,6 +95,21 @@ class SessionValidationController
         return SessionValidationController::validateRequestFromQueue($queue, $includeTargetUrl, $sslEnabled, $domainAlias, $language, $layoutName);
     }
 
+    /**
+     * Validate the request
+     *
+     * @param   string   $customerId
+     * @param   string   $eventId
+     * @param   boolean  $includeTargetUrl
+     * @param   boolean  $sslEnabled
+     * @param   string   $domainAlias
+     * @param   string   $language
+     * @param   string   $layoutName
+     *
+     * @throws  InvalidArgumentException when customerId or eventId is not given.
+     *
+     * @return  [type]
+     */
     static function validateRequest($customerId, $eventId, $includeTargetUrl = null, $sslEnabled = null, $domainAlias = null, $language = null, $layoutName = null)
     {
         if ($customerId == null)
@@ -80,18 +122,30 @@ class SessionValidationController
         return SessionValidationController::validateRequestFromQueue($queue, $includeTargetUrl, $sslEnabled, $domainAlias, $language, $layoutName);
     }
     
+    /**
+     * Validate request from Queue
+     *
+     * @param   Queue    $queue
+     * @param   boolean  $includeTargetUrl
+     * @param   boolean  $sslEnabled
+     * @param   string   $domainAlias
+     * @param   string   $language
+     * @param   string   $layoutName
+     *
+     * @throws  KnownUserValidationException
+     * @throws  ExpiredValidationException
+     * 
+     * @return  AcceptedConfirmedResult|EnqueueResult
+     */
     private static function validateRequestFromQueue($queue, $includeTargetUrl = null, $sslEnabled = null, $domainAlias = null, $language = null, $layoutName = null)
     {
         global $resultProviderFactory;
     
         $sessionObject = $resultProviderFactory()->getValidationResult($queue);
             
-        if ($sessionObject != null)
-        {           
+        if ($sessionObject != null) {           
             if ($sessionObject instanceof AcceptedConfirmedResult)
-            {
                 return new AcceptedConfirmedResult($queue, $sessionObject->getKnownUser(), false);
-            }           
             
             return $sessionObject;
         }
@@ -99,8 +153,7 @@ class SessionValidationController
         try {
             $knownUser = KnownUserFactory::verifyMd5Hash();
             
-            if ($knownUser == null)
-            {
+            if ($knownUser == null) {
                 $landingPage = $queue->getLandingPageUrl($includeTargetUrl);
                 
                 if ($landingPage != null)
@@ -116,14 +169,10 @@ class SessionValidationController
             $resultProviderFactory()->setValidationResult($queue, $result);
             
             return $result;
-        }
-        catch (InvalidKnownUserUrlException $ex)
-        {
-            throw new KnownUserValidationException($ex, $queue);
-        }
-        catch (InvalidKnownUserHashException $ex)
-        {
-            throw new KnownUserValidationException($ex, $queue);
+        } catch (InvalidKnownUserUrlException $e) {
+            throw new KnownUserValidationException($e, $queue);
+        } catch (InvalidKnownUserHashException $e) {
+            throw new KnownUserValidationException($e, $queue);
         }       
     }
 }

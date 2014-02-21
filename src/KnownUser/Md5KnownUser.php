@@ -28,6 +28,11 @@ class Md5KnownUser implements KnownUserInterface
 		return $this->queueId;
 	}
 	
+	/**
+	 * Get number of place in queue
+	 *
+	 * @return  integer
+	 */
 	public function getPlaceInQueue()
 	{
 		if ($this->placeInQueue == 9999999 || $this->placeInQueue <= 0)
@@ -35,6 +40,7 @@ class Md5KnownUser implements KnownUserInterface
 		
 		return $this->placeInQueue;
 	}
+
 	public function getTimeStamp()
 	{
 		return $this->timeStamp;

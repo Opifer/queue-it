@@ -18,6 +18,13 @@ class DefaultKnownUserUrlProvider implements KnownUserUrlProviderInterface
 		return $identifier->currentUrl();
 	}
 	
+	/**
+	 * Get Queue ID
+	 *
+	 * @param   string  $queryStringPrefix
+	 *
+	 * @return  string
+	 */
 	public function getQueueId($queryStringPrefix)
 	{
 		$key = $queryStringPrefix . "q";
@@ -25,6 +32,13 @@ class DefaultKnownUserUrlProvider implements KnownUserUrlProviderInterface
 		return $this->getVar($key);
 	}
 	
+	/**
+	 * Get Place-in-queue prefix
+	 *
+	 * @param   string  $queryStringPrefix
+	 *
+	 * @return  string
+	 */
 	public function getPlaceInQueue($queryStringPrefix)
 	{
 		$key = $queryStringPrefix . "p";
@@ -32,6 +46,13 @@ class DefaultKnownUserUrlProvider implements KnownUserUrlProviderInterface
 		return $this->getVar($key);
 	}
 	
+	/**
+	 * Get timestamp
+	 *
+	 * @param   string  $queryStringPrefix
+	 *
+	 * @return  [type]
+	 */
 	public function getTimeStamp($queryStringPrefix)
 	{
 		$key = $queryStringPrefix . "ts";
@@ -39,6 +60,13 @@ class DefaultKnownUserUrlProvider implements KnownUserUrlProviderInterface
 		return $this->getVar($key);
 	}
 	
+	/**
+	 * Get event ID
+	 *
+	 * @param   string  $queryStringPrefix
+	 *
+	 * @return  string
+	 */
 	public function getEventId($queryStringPrefix)
 	{
 		$key = $queryStringPrefix . "e";
@@ -46,6 +74,13 @@ class DefaultKnownUserUrlProvider implements KnownUserUrlProviderInterface
 		return $this->getVar($key);
 	}
 	
+	/**
+	 * Get customer ID
+	 *
+	 * @param   string  $queryStringPrefix
+	 *
+	 * @return  [type]
+	 */
 	public function getCustomerId($queryStringPrefix)
 	{
 		$key = $queryStringPrefix . "c";
@@ -53,6 +88,13 @@ class DefaultKnownUserUrlProvider implements KnownUserUrlProviderInterface
 		return $this->getVar($key);
 	}
 
+	/**
+	 * Get redirect type
+	 *
+	 * @param   string  $queryStringPrefix
+	 *
+	 * @return  string
+	 */
 	public function getRedirectType($queryStringPrefix)
 	{
 		$key = $queryStringPrefix . "rt";
@@ -60,6 +102,13 @@ class DefaultKnownUserUrlProvider implements KnownUserUrlProviderInterface
 		return $this->getVar($key);
 	}
 	
+	/**
+	 * Get original URL
+	 *
+	 * @param   string  $queryStringPrefix
+	 *
+	 * @return  string
+	 */
 	public function getOriginalUrl($queryStringPrefix)
 	{
 		$url = $this->getUrl();
@@ -76,6 +125,13 @@ class DefaultKnownUserUrlProvider implements KnownUserUrlProviderInterface
 		return $url;
 	}
 	
+	/**
+	 * Get var
+	 *
+	 * @param   string  $key
+	 *
+	 * @return  mixed
+	 */
 	private function getVar($key)
 	{
 		if (!isset($_GET[$key]))
