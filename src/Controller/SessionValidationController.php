@@ -52,13 +52,13 @@ class SessionValidationController
             return;
         
         if (isset($settings['ticketExpiration']) && $settings['ticketExpiration'] != null && is_numeric($settings['ticketExpiration']))
-            $defaultSecretKey = intval($settings['ticketExpiration']);
+            $defaultTicketExpiration = intval($settings['ticketExpiration']);
     }
     
     /**
      * Configure
      *
-     * @param   [type]  $ticketExpiration
+     * @param   integer  $ticketExpiration
      * @param   [type]  $validationResultProviderFactory
      *
      * @return  void
