@@ -2,7 +2,7 @@
     "name": "opifer/queue-it",
     "description": "A modified version of queueit/QueueIT.Security-Php",
     "homepage": "https://github.com/Opifer/queue-it",
-    "license": "GPL-2.0",
+    "license": "GPL-3.0",
     "type": "library",
     "require": {
         "php": ">=5.3.0"
