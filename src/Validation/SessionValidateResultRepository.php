@@ -7,9 +7,9 @@ class SessionValidateResultRepository extends ValidateResultRepositoryBase
 	/**
 	 * Get validation result
 	 *
-	 * @param   Queue  $queue
+	 * @param   Opifer\QueueIt\Queue\Queue  $queue
 	 *
-	 * @return  [type]
+	 * @return  string
 	 */
 	public function getValidationResult($queue)
 	{		
@@ -26,14 +26,16 @@ class SessionValidateResultRepository extends ValidateResultRepositoryBase
 	/**
 	 * Set validation result
 	 *
-	 * @param  Queue  $queue
-	 * @param  [type]  $validationResult
+	 * @param   Opifer\QueueIt\Queue\Queue  					   $queue
+	 * @param   Opifer\QueueIt\Validation\AcceptedConfirmedResult  $validationResult
+	 *
+	 * @return  void
 	 */
 	public function setValidationResult($queue, $validationResult)
 	{
-		if ($result instanceof AcceptedConfirmedResult) {
+		if ($validationResult instanceof AcceptedConfirmedResult) {
 			$key = $this->generateKey($queue->getCustomerId(), $queue->getEventId());
 			$_SESSION[$key] = $validationResult;
-		}		
+		}
 	}
 }
