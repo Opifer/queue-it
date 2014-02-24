@@ -12,9 +12,9 @@ class SessionValidationException extends \Exception
 	/**
 	 * Constructor
 	 *
-	 * @param  string     $message
-	 * @param  Exception  $previous
-	 * @param  Queue      $queue
+	 * @param  string     				   $message
+	 * @param  Exception  				   $previous
+	 * @param  Opifer\QueueIt\Queue\Queue  $queue
 	 */
 	function __construct($message, $previous, $queue)
 	{
@@ -26,7 +26,7 @@ class SessionValidationException extends \Exception
 	/**
 	 * Get queue
 	 *
-	 * @return  Queue
+	 * @return  Opifer\QueueIt\Queue\Queue
 	 */
 	function getQueue()
 	{

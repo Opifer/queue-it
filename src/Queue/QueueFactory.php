@@ -43,9 +43,9 @@ class QueueFactory
 	 * @param   string  $queueName
 	 *
 	 * @throws  InvalidArgumentException
-	 * @throws  ConfigurationErrorsException
+	 * @throws  Opifer\QueueIt\Exception\ConfigurationErrorsException
 	 *
-	 * @return  Queue
+	 * @return  Opifer\QueueIt\Queue\Queue
 	 */
 	static function createQueueFromConfiguration($queueName = 'default')
 	{
@@ -68,14 +68,15 @@ class QueueFactory
 			throw new ConfigurationErrorsException('Configuration for Queue Name "' . $queueName . '" in file "' . $iniFileName . '" is missing from configuration file');
 		
 		return QueueFactory::instantiateQueue(
-				$queue['customerId'], 
-				$queue['eventId'], 
-				isset($queue['domainAlias']) ? $queue['domainAlias'] : null, 
-				isset($queue['landingPage']) ? $queue['landingPage'] : null, 
-				isset($queue['useSsl']) && $queue['useSsl'] == 1 ? true : false, 
-				isset($queue['includeTargetUrl']) && $queue['includeTargetUrl'] == 1 ? true : false,
-				isset($queue['language']) ? $queue['language'] : null, 
-				isset($queue['layoutName']) ? $queue['layoutName'] : null);		
+			$queue['customerId'], 
+			$queue['eventId'], 
+			isset($queue['domainAlias']) ? $queue['domainAlias'] : null, 
+			isset($queue['landingPage']) ? $queue['landingPage'] : null, 
+			isset($queue['useSsl']) && $queue['useSsl'] == 1 ? true : false, 
+			isset($queue['includeTargetUrl']) && $queue['includeTargetUrl'] == 1 ? true : false,
+			isset($queue['language']) ? $queue['language'] : null, 
+			isset($queue['layoutName']) ? $queue['layoutName'] : null
+		);		
 	}
 	
 	/**
@@ -84,7 +85,7 @@ class QueueFactory
 	 * @param   string  $customerId
 	 * @param   string  $eventId
 	 *
-	 * @return  Queue
+	 * @return  Opifer\QueueIt\Queue\Queue
 	 */
 	static function createQueue($customerId, $eventId)
 	{
@@ -103,7 +104,7 @@ class QueueFactory
 	 * @param   string   $language
 	 * @param   string   $layoutName
 	 *
-	 * @return  Queue
+	 * @return  Opifer\QueueIt\Queue\Queue
 	 */
 	private static function instantiateQueue($customerId, $eventId, $domainAlias, $landingPage, $sslEnabled, $includeTargetUrl, $language, $layoutName)
 	{

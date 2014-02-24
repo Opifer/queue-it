@@ -12,7 +12,7 @@ class ValidateResultBase implements ValidateResultInterface
 	/**
 	 * Constructor
 	 *
-	 * @param  Queue  $queue
+	 * @param  Opifer\QueueIt\Queue\Queue  $queue
 	 */
 	public function __construct($queue)
 	{
@@ -22,7 +22,7 @@ class ValidateResultBase implements ValidateResultInterface
 	/**
 	 * Get Queue
 	 *
-	 * @return  Queue
+	 * @return  Opifer\QueueIt\Queue\Queue
 	 */
 	function getQueue()
 	{

@@ -58,11 +58,11 @@ class KnownUserFactory
 	/**
 	 * Configure
 	 *
-	 * @param   [type]  $sharedEventKey
-	 * @param   [type]  $urlProviderFactory
-	 * @param   [type]  $querystringPrefix
+	 * @param   string  $sharedEventKey
+	 * @param   string  $urlProviderFactory
+	 * @param   string  $querystringPrefix
 	 *
-	 * @return  [type]
+	 * @return  void
 	 */
 	static function configure($sharedEventKey = null, $urlProviderFactory = null, $querystringPrefix = null)
 	{
@@ -95,11 +95,11 @@ class KnownUserFactory
 	 * @param   KnownUserUrlProviderInterface  $urlProvider
 	 * @param   string  					   $queryStringPrefix
 	 *
-	 * @throws  InvalidArgumentException if $secretKey is null
-	 * @throws  InvalidKnownUserUrlException
-	 * @throws  KnownUserException
+	 * @throws  InvalidArgumentException 							   if $secretKey is null
+	 * @throws  Opifer\QueueIt\Exception\InvalidKnownUserUrlException
+	 * @throws  Opifer\QueueIt\Exception\KnownUserException
 	 *
-	 * @return  Md5KnownUser
+	 * @return  Opifer\QueueIt\Queue\Md5KnownUser
 	 */
 	public static function verifyMd5Hash($secretKey = null, $urlProvider = null, $queryStringPrefix = null)
 	{
@@ -145,8 +145,8 @@ class KnownUserFactory
 	 *
 	 * @param   integer  $timestamp
 	 *
-	 * @throws  InvalidKnownUserUrlException  if $timestamp is not an integer
-	 *          							  or is null.
+	 * @throws  Opifer\QueueIt\Exception\InvalidKnownUserUrlException  if $timestamp is not an integer
+	 *          							  						   or is null.
 	 *
 	 * @return  DateTime
 	 */
@@ -165,9 +165,9 @@ class KnownUserFactory
 	/**
 	 * Decode redirect type
 	 *
-	 * @param   RedirectType  $redirectType
+	 * @param   Opifer\QueueIt\Redirect\RedirectType  $redirectType
 	 *
-	 * @return  RedirectType
+	 * @return  integer
 	 */
 	private static function decodeRedirectType($redirectType)
 	{
@@ -179,7 +179,7 @@ class KnownUserFactory
 	 *
 	 * @param   string  $encryptedPlaceInQueue
 	 *
-	 * @throws  InvalidKnownUserUrlException
+	 * @throws  Opifer\QueueIt\Exception\InvalidKnownUserUrlException
 	 *
 	 * @return  integer
 	 */
@@ -225,7 +225,7 @@ class KnownUserFactory
 	 * @param   string  $url
 	 * @param   [type]  $sharedEventKey
 	 *
-	 * @throws  InvalidKnownUserHashException  when hash could not be verified
+	 * @throws  Opifer\QueueIt\Exception\InvalidKnownUserHashException  when hash could not be verified
 	 *
 	 * @return  void
 	 */

@@ -4,15 +4,22 @@ namespace Opifer\QueueIt\Validation;
 
 class AcceptedConfirmedResult extends ValidateResultBase
 {
+	/**
+	 * @var  boolean
+	 */
 	private $initialRequest;
+
+	/**
+	 * @var  Opifer\QueueIt\KnownUser\KnownUserInterface
+	 */
 	private $knownUser;
 	
 	/**
 	 * Constructor
 	 *
-	 * @param  QueueInterface      $queue
-	 * @param  KnownUserInterface  $knownUser
-	 * @param  [type]              $initialRequest
+	 * @param  Opifer\QueueIt\Queue\QueueInterface      	$queue
+	 * @param  Opifer\QueueIt\KnownUser\KnownUserInterface  $knownUser
+	 * @param  boolean             							$initialRequest
 	 */
 	public function __construct($queue, $knownUser, $initialRequest)
 	{
@@ -25,7 +32,7 @@ class AcceptedConfirmedResult extends ValidateResultBase
 	/**
 	 * Is initial validation request
 	 *
-	 * @return  boolean //?
+	 * @return  boolean
 	 */
 	function isInitialValidationRequest()
 	{
@@ -35,7 +42,7 @@ class AcceptedConfirmedResult extends ValidateResultBase
 	/**
 	 * Get known user
 	 *
-	 * @return  KnownUserInterface
+	 * @return  Opifer\QueueIt\KnownUser\KnownUserInterface
 	 */
 	function getKnownUser()
 	{

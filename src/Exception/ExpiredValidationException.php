@@ -9,8 +9,8 @@ class ExpiredValidationException extends SessionValidationException
 	/**
 	 * Constructor
 	 *
-	 * @param  QueueInterface      $queue
-	 * @param  KnownUserInterface  $knownUser
+	 * @param  Opifer\QueueIt\Queue\QueueInterface          $queue
+	 * @param  Opifer\QueueIt\KnownUser\KnownUserInterface  $knownUser
 	 */
 	public function __construct($queue, $knownUser)
 	{
@@ -22,7 +22,7 @@ class ExpiredValidationException extends SessionValidationException
 	/** 
 	 * Get known user
 	 * 
-	 * @return  KnownUserInterface
+	 * @return  Opifer\QueueIt\KnownUser\KnownUserInterface
 	 */
 	function getKnownUser()
 	{

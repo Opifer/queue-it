@@ -59,7 +59,7 @@ class SessionValidationController
      * Configure
      *
      * @param   integer  $ticketExpiration
-     * @param   [type]  $validationResultProviderFactory
+     * @param   [type]   $validationResultProviderFactory
      *
      * @return  void
      */
@@ -83,7 +83,8 @@ class SessionValidationController
      * @param   string   $language
      * @param   string   $layoutName
      *
-     * @return  [type]
+     * @return  Opifer\QueueIt\Validation\AcceptedConfirmedResult|
+     *          Opifer\QueueIt\Validation\EnqueueResult
      */
     static function validateRequestFromConfiguration($queueName = 'default', $includeTargetUrl = null, $sslEnabled = null, $domainAlias = null, $language = null, $layoutName = null)
     {
@@ -106,9 +107,10 @@ class SessionValidationController
      * @param   string   $language
      * @param   string   $layoutName
      *
-     * @throws  InvalidArgumentException when customerId or eventId is not given.
+     * @throws  Opifer\QueueIt\Exception\InvalidArgumentException when customerId or eventId is not given.
      *
-     * @return  [type]
+     * @return  Opifer\QueueIt\Validation\AcceptedConfirmedResult|
+     *          Opifer\QueueIt\Validation\EnqueueResult
      */
     static function validateRequest($customerId, $eventId, $includeTargetUrl = null, $sslEnabled = null, $domainAlias = null, $language = null, $layoutName = null)
     {
@@ -132,10 +134,11 @@ class SessionValidationController
      * @param   string   $language
      * @param   string   $layoutName
      *
-     * @throws  KnownUserValidationException
-     * @throws  ExpiredValidationException
+     * @throws  Opifer\QueueIt\Exception\KnownUserValidationException
+     * @throws  Opifer\QueueIt\Exception\ExpiredValidationException
      * 
-     * @return  AcceptedConfirmedResult|EnqueueResult
+     * @return  Opifer\QueueIt\Validation\AcceptedConfirmedResult|
+     *          Opifer\QueueIt\Validation\EnqueueResult
      */
     private static function validateRequestFromQueue($queue, $includeTargetUrl = null, $sslEnabled = null, $domainAlias = null, $language = null, $layoutName = null)
     {

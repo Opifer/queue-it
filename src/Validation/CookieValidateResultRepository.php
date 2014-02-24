@@ -14,7 +14,7 @@ class CookieValidateResultRepository extends ValidateResultRepositoryBase
 	 *
 	 * @param   boolean  $loadConfiguration
 	 *
-	 * @return  [type]
+	 * @return  void
 	 */
 	static function reset($loadConfiguration = false)
 	{
@@ -49,55 +49,64 @@ class CookieValidateResultRepository extends ValidateResultRepositoryBase
 			$cookieExpiration = (int)$settings['cookieExpiration'];
 	}
 	
+	/**
+	 * Get validation result
+	 *
+	 * @param   Opifer\QueueIt\Queue\Queue  $queue
+	 *
+	 * @return  Opifer\QueueIt\Validation\AcceptedConfirmResult
+	 */
 	public function getValidationResult($queue)
 	{
 		$key = $this->generateKey($queue->getCustomerId(), $queue->getEventId());
 		
-		if (isset($_COOKIE[$key])) {
-			try {
-				$values = $_COOKIE[$key];
-				
-				$queueId = $values["QueueId"];
-				$originalUrl = $values["OriginalUrl"];
-				$placeInQueue = KnownUserFactory::decryptPlaceInQueue($values["PlaceInQueue"]);
-				$redirectType = $values["RedirectType"];
-				$timeStamp = $values["TimeStamp"];
-				$actualHash = $values["Hash"];
-				
-				$expectedHash = $this->generateHash($queueId, $originalUrl, $placeInQueue, $redirectType, $timeStamp);
-						
-				
-				if ($actualHash != $expectedHash)
-					return null;
-				
-				$this->writeCookie($queue, $queueId, $originalUrl, $placeInQueue, $redirectType, $timeStamp, $actualHash);
+		if (!isset($_COOKIE[$key]))
+			return null;
 
-				$parsedTimeStamp = new \DateTime("now", new \DateTimeZone("UTC"));
-				$parsedTimeStamp->setTimestamp(intval($timeStamp));
-				
-				return new AcceptedConfirmedResult(
-					$queue, 
-					new Md5KnownUser(
-							$queueId, 
-							$placeInQueue, 
-							$parsedTimeStamp, 
-							$queue->getCustomerId(), 
-							$queue->getEventId(), 
-							$redirectType, 
-							$originalUrl), 
-					false
-				);
-			}
-			catch (InvalidKnownUserUrlException $e)
-			{
-				return null;
-			}
+		try {
+			$values = $_COOKIE[$key];
 			
-		}
+			$queueId = $values["QueueId"];
+			$originalUrl = $values["OriginalUrl"];
+			$placeInQueue = KnownUserFactory::decryptPlaceInQueue($values["PlaceInQueue"]);
+			$redirectType = $values["RedirectType"];
+			$timeStamp = $values["TimeStamp"];
+			$actualHash = $values["Hash"];
+			
+			$expectedHash = $this->generateHash($queueId, $originalUrl, $placeInQueue, $redirectType, $timeStamp);
+					
+			
+			if ($actualHash != $expectedHash)
+				return null;
+			
+			$this->writeCookie($queue, $queueId, $originalUrl, $placeInQueue, $redirectType, $timeStamp, $actualHash);
 
-		return $result;
+			$parsedTimeStamp = new \DateTime("now", new \DateTimeZone("UTC"));
+			$parsedTimeStamp->setTimestamp(intval($timeStamp));
+			
+			return new AcceptedConfirmedResult(
+				$queue, 
+				new Md5KnownUser(
+						$queueId, 
+						$placeInQueue, 
+						$parsedTimeStamp, 
+						$queue->getCustomerId(), 
+						$queue->getEventId(), 
+						$redirectType, 
+						$originalUrl), 
+				false
+			);
+		} catch (InvalidKnownUserUrlException $e) {
+			return null;
+		}
 	}
 
+	/**
+	 * Set validation result
+	 *
+	 * @param  Opifer\QueueIt\Queue\Queue                       $queue
+	 * @param  Opifer\QueueIt\Validation\AcceptedConfirmResult  $validationResult
+	 */
 	public function setValidationResult($queue, $validationResult)
 	{		
 		if ($validationResult instanceof AcceptedConfirmedResult)
@@ -113,6 +122,19 @@ class CookieValidateResultRepository extends ValidateResultRepositoryBase
 		}
 	}
 	
+	/**
+	 * Write cookie
+	 *
+	 * @param   Opifer\QueueIt\Queue\Queue  $queue
+	 * @param   string					    $queueId
+	 * @param   string					    $originalUrl
+	 * @param   integer					    $placeInQueue
+	 * @param   string					    $redirectType
+	 * @param   integer					    $timeStamp
+	 * @param   string					    $hash
+	 *
+	 * @return  void
+	 */
 	private function writeCookie($queue, $queueId, $originalUrl, $placeInQueue, $redirectType, $timeStamp, $hash)
 	{
 		global $cookieDomain;
@@ -129,6 +151,17 @@ class CookieValidateResultRepository extends ValidateResultRepositoryBase
 		setcookie($key . "[Hash]", $hash, $expires, null, $cookieDomain, false, true);		
 	}
 	
+	/**
+	 * Generate hash
+	 *
+	 * @param   string   $queueId
+	 * @param   string   $originalUrl
+	 * @param   integer  $placeInQueue
+	 * @param   string   $redirectType
+	 * @param   integer  $timestamp
+	 *
+	 * @return  string
+	 */
 	private function generateHash($queueId, $originalUrl, $placeInQueue, $redirectType, $timestamp)
 	{
 		return hash("sha256", $queueId . $originalUrl . $placeInQueue . $redirectType . $timestamp . KnownUserFactory::getSecretKey());

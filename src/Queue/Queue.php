@@ -66,16 +66,15 @@ class Queue implements QueueInterface
 	 *
 	 * @param   string   $targetUrl
 	 * @param   boolean  $sslEnabled
-	 * @param   stromg   $domainAlias
-	 * @param   stromg   $language
-	 * @param   stromg   $layoutName
+	 * @param   string   $domainAlias
+	 * @param   string   $language
+	 * @param   string   $layoutName
 	 *
 	 * @return  string
 	 */
 	public function getQueueUrl($targetUrl = null, $sslEnabled = null, $domainAlias = null, $language = null, $layoutName = null)
 	{	
 		$queueUrl = $this->getQueueUrlWithoutTarget($sslEnabled, $domainAlias, $language, $layoutName);
-		
 		$queueUrl = $this->includeTargetUrl($targetUrl, $queueUrl);
 		
 		return $queueUrl;

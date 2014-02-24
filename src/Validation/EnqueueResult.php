@@ -4,13 +4,16 @@ namespace Opifer\QueueIt\Validation;
 
 class EnqueueResult extends ValidateResultBase
 {
+	/**
+	 * @var  string
+	 */
 	private $redirectUrl;
 	
 	/**
 	 * Constructor
 	 *
-	 * @param  Queue   $queue
-	 * @param  string  $redirectUrl
+	 * @param  Opifer\QueueIt\Queue\Queue   $queue
+	 * @param  string  						$redirectUrl
 	 */
 	public function __construct($queue, $redirectUrl)
 	{
