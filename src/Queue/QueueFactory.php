@@ -52,7 +52,7 @@ class QueueFactory
 		if ($queueName == null)
 			throw new InvalidArgumentException('Queue Name cannot be null or empty');
 		
-		$iniFileName = $_SERVER['DOCUMENT_ROOT'] . "/queueit.ini";
+		$iniFileName = $_SERVER['DOCUMENT_ROOT'] . "/../queueit.ini";
 		
 		if (!file_exists($iniFileName))
 			throw new ConfigurationErrorsException('Configuration file "' . $iniFileName . '" is missing');

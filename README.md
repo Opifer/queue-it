@@ -6,4 +6,7 @@ A refactored version of the [queueit/QueueIT.Security-Php](https://github.com/qu
 Documentation
 -------------
 
+- move `config/queueit.ini` to `$_SERVER['DOCUMENT_ROOT'] . "\..\queueit.ini`.
+-
+
 http://securitydoc-assets.queue-it.net/
