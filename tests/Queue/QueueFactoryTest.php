@@ -11,7 +11,7 @@ class QueueFactoryTest extends \PHPUnit_Framework_TestCase
         $_SERVER["REQUEST_URI"] = null;
         // Set the document root to the current directory, to make sure the tests
         // uses our test queueit.ini
-        $_SERVER['DOCUMENT_ROOT'] = __DIR__;
+        $_SERVER['DOCUMENT_ROOT'] = __DIR__ . '/web';
 
         QueueFactory::reset(false);
 
