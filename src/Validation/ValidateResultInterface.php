@@ -7,7 +7,7 @@ interface ValidateResultInterface
     /**
      * Get Queue
      *
-     * @return  Queue
+     * @return Queue
      */
-	public function getQueue();	
+    public function getQueue();
 }

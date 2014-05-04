@@ -5,11 +5,11 @@ namespace Opifer\QueueIt\Identifier;
 class Identifier
 {
     /**
-     * @return  string
+     * @return string
      */
     public function guid()
     {
-        mt_srand((double)microtime()*10000);
+        mt_srand((double) microtime()*10000);
         $charid = strtolower(md5(uniqid(rand(), true)));
         $hyphen = chr(45);
         $uuid = substr($charid, 0, 8).$hyphen
@@ -22,7 +22,7 @@ class Identifier
     }
 
     /**
-     * @return  string
+     * @return string
      */
     public function currentUrl()
     {
@@ -31,14 +31,14 @@ class Identifier
         $pageURL = 'http';
         if ($ssl) {$pageURL .= "s";}
         $pageURL .= "://";
-        if ((!$ssl && $_SERVER["SERVER_PORT"] != "80") || ($ssl && $_SERVER["SERVER_PORT"] != "443"))  {
+        if ((!$ssl && $_SERVER["SERVER_PORT"] != "80") || ($ssl && $_SERVER["SERVER_PORT"] != "443")) {
             $pageURL .= $_SERVER["SERVER_NAME"].":".$_SERVER["SERVER_PORT"].$_SERVER["REQUEST_URI"];
         } elseif (strpos($_SERVER["REQUEST_URI"], 'http:') === 0) {
             $pageURL = $_SERVER["REQUEST_URI"];
         } else {
             $pageURL .= $_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
         }
-        
+
         return $pageURL;
     }
 }

@@ -29,7 +29,7 @@ class QueueFactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expectedEventId, $queue->getEventId());
     }
 
-    public function testCreateQueueFromConfiguration() 
+    public function testCreateQueueFromConfiguration()
     {
         $expectedCustomerId = "defaultcustomerid";
         $expectedEventId = "defaulteventid";
@@ -63,7 +63,7 @@ class QueueFactoryTest extends \PHPUnit_Framework_TestCase
 
         $actualQueueUrl = $queue->GetQueueUrl();
 
-        $this->assertEquals($expectedQueueUrl, $actualQueueUrl);     
+        $this->assertEquals($expectedQueueUrl, $actualQueueUrl);
     }
 
     public function testGetQueueUrlLanguage()

@@ -38,10 +38,10 @@ class KnownUserFactoryTest extends \PHPUnit_Framework_TestCase
 
         $urlProvider = new MockUrlProvider(
             $url,
-            $expectedOriginalUrl, 
-            $expectedQueueId, 
-            $placeInQueueEncrypted, 
-            (string)$unixTimestamp, 
+            $expectedOriginalUrl,
+            $expectedQueueId,
+            $placeInQueueEncrypted,
+            (string) $unixTimestamp,
             $expectedCustomerId,
             $expectedEventId,
             "queue");
@@ -87,7 +87,7 @@ class KnownUserFactoryTest extends \PHPUnit_Framework_TestCase
             $expectedOriginalUrl,
             $expectedQueueId,
             $placeInQueueEncrypted,
-            (string)$unixTimestamp,
+            (string) $unixTimestamp,
             $expectedCustomerId,
             $expectedEventId);
 
@@ -125,10 +125,10 @@ class KnownUserFactoryTest extends \PHPUnit_Framework_TestCase
 
         $urlProvider = new MockUrlProvider(
             $url,
-            "http://q.queue-it.net/inqueue.aspx", 
-            $expectedQueueId, 
-            $placeInQueueEncrypted, 
-            (string)$unixTimestamp, 
+            "http://q.queue-it.net/inqueue.aspx",
+            $expectedQueueId,
+            $placeInQueueEncrypted,
+            (string) $unixTimestamp,
             $expectedCustomerId,
             $expectedEventId);
 
@@ -196,7 +196,7 @@ class KnownUserFactoryTest extends \PHPUnit_Framework_TestCase
             $expectedOriginalUrl,
             $expectedQueueId,
             $placeInQueueEncrypted,
-            (string)$unixTimestamp,
+            (string) $unixTimestamp,
             $expectedCustomerId,
             $expectedEventId);
 
@@ -231,7 +231,7 @@ class KnownUserFactoryTest extends \PHPUnit_Framework_TestCase
             $expectedOriginalUrl,
             $expectedQueueId,
             $placeInQueueEncrypted,
-            (string)$unixTimestamp,
+            (string) $unixTimestamp,
             $expectedCustomerId,
             $expectedEventId);
 
@@ -240,7 +240,7 @@ class KnownUserFactoryTest extends \PHPUnit_Framework_TestCase
         } catch (KnownUserException $e) {
             $this->assertEquals($url, $e->getValidationUrl());
             $this->assertEquals($expectedOriginalUrl, $e->getOriginalUrl());
-        }       
+        }
     }
 }
 
@@ -256,12 +256,12 @@ class MockUrlProvider implements KnownUserUrlProviderInterface
     private $originalUrl;
 
     public function __construct(
-            $url, 
-            $originalUrl = null, 
-            $queueId = null, 
-            $placeInQueue = null, 
-            $timestamp = null, 
-            $customerId = null, 
+            $url,
+            $originalUrl = null,
+            $queueId = null,
+            $placeInQueue = null,
+            $timestamp = null,
+            $customerId = null,
             $eventId = null,
             $redirectType = null)
     {
@@ -282,7 +282,7 @@ class MockUrlProvider implements KnownUserUrlProviderInterface
 
     public function getQueueId($queueStringPrefix)
     {
-        return $this->queueId;      
+        return $this->queueId;
     }
     public function getPlaceInQueue($queueStringPrefix)
     {
@@ -303,7 +303,7 @@ class MockUrlProvider implements KnownUserUrlProviderInterface
     public function getRedirectType($queueStringPrefix)
     {
         return $this->redirectType;
-    }   
+    }
     public function getOriginalUrl($queueStringPrefix)
     {
         return $this->originalUrl;

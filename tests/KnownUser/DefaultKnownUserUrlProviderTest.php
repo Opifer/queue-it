@@ -36,7 +36,7 @@ class DefaultKnownUserUrlProviderTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($actualUrl, $expectedUrl);
     }
 
-    function testGetUrlOtherport()
+    public function testGetUrlOtherport()
     {
         $expectedUrl = "http://www.example.com:8080/somepath/x?prop=value";
 
@@ -45,14 +45,14 @@ class DefaultKnownUserUrlProviderTest extends \PHPUnit_Framework_TestCase
         $_SERVER["SERVER_NAME"] = "www.example.com";
         $_SERVER["REQUEST_URI"] = "/somepath/x?prop=value";
 
-        $urlProvider = new DefaultKnownUserUrlProvider();   
+        $urlProvider = new DefaultKnownUserUrlProvider();
 
         $actualUrl = $urlProvider->getUrl();
 
         $this->assertEquals($actualUrl, $expectedUrl);
     }
 
-    function testGetUrlHttpswithotherport()
+    public function testGetUrlHttpswithotherport()
     {
         $expectedUrl = "https://www.example.com:4433/somepath/x?prop=value";
 
@@ -61,29 +61,27 @@ class DefaultKnownUserUrlProviderTest extends \PHPUnit_Framework_TestCase
         $_SERVER["SERVER_NAME"] = "www.example.com";
         $_SERVER["REQUEST_URI"] = "/somepath/x?prop=value";
 
-
         $urlProvider = new DefaultKnownUserUrlProvider();
-
 
         $actualUrl = $urlProvider->getUrl();
 
         $this->assertEquals($actualUrl, $expectedUrl);
     }
 
-    function testGetQueueId()
+    public function testGetQueueId()
     {
         $expectedQueueId = "48f6687b-7db3-4f95-be30-2fe82d8dcced";
 
-        $_GET = array('q' => $expectedQueueId); 
+        $_GET = array('q' => $expectedQueueId);
 
-        $urlProvider = new DefaultKnownUserUrlProvider();   
+        $urlProvider = new DefaultKnownUserUrlProvider();
 
         $actualQueueId = $urlProvider->getQueueId(null);
 
         $this->assertEquals($actualQueueId, $expectedQueueId);
     }
 
-    function testGetQueueIdWithprefix()
+    public function testGetQueueIdWithprefix()
     {
         $expectedQueueId = "48f6687b-7db3-4f95-be30-2fe82d8dcced";
 
@@ -96,7 +94,7 @@ class DefaultKnownUserUrlProviderTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($actualQueueId, $expectedQueueId);
     }
 
-    function testGetPlaceInQueue()
+    public function testGetPlaceInQueue()
     {
         $expectedPlaceInQueue = "48f6687b-7db3-4f95-be30-2fe82d8dcced";
 
@@ -109,7 +107,7 @@ class DefaultKnownUserUrlProviderTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($actualPlaceInQueue, $expectedPlaceInQueue);
     }
 
-    function testGetPlaceInQueueWithPrefix()
+    public function testGetPlaceInQueueWithPrefix()
     {
         $expectedPlaceInQueue = "48f6687b-7db3-4f95-be30-2fe82d8dcced";
 
@@ -122,7 +120,7 @@ class DefaultKnownUserUrlProviderTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($actualPlaceInQueue, $expectedPlaceInQueue);
     }
 
-    function testGetTimestamp()
+    public function testGetTimestamp()
     {
         $expectedTimestamp = '1360241766';
 
@@ -135,7 +133,7 @@ class DefaultKnownUserUrlProviderTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($actualTimestamp, $expectedTimestamp);
     }
 
-    function testGetTimestampWithprefix()
+    public function testGetTimestampWithprefix()
     {
         $expectedTimestamp = '1360241766';
 
@@ -148,7 +146,7 @@ class DefaultKnownUserUrlProviderTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($actualTimestamp, $expectedTimestamp);
     }
 
-    function testGetEventId()
+    public function testGetEventId()
     {
         $expectedEventId = "testevent";
 
@@ -161,7 +159,7 @@ class DefaultKnownUserUrlProviderTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($actualEventId, $expectedEventId);
     }
 
-    function testGetEventIdWithPrefix()
+    public function testGetEventIdWithPrefix()
     {
         $expectedEventId = "testevent";
 
@@ -174,7 +172,7 @@ class DefaultKnownUserUrlProviderTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($actualEventId, $expectedEventId);
     }
 
-    function testGetCustomerId()
+    public function testGetCustomerId()
     {
         $expectedCustomerId = "testevent";
 
@@ -187,7 +185,7 @@ class DefaultKnownUserUrlProviderTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($actualCustomerId, $expectedCustomerId);
     }
 
-    function testGetCustomerIdWithprefix()
+    public function testGetCustomerIdWithprefix()
     {
         $expectedCustomerId = "testevent";
 
@@ -200,7 +198,7 @@ class DefaultKnownUserUrlProviderTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($actualCustomerId, $expectedCustomerId);
     }
 
-    function testGetOriginalUrl()
+    public function testGetOriginalUrl()
     {
         $expectedUrl = "http://www.example.com/somepath/x?prop=value";
 
@@ -216,7 +214,7 @@ class DefaultKnownUserUrlProviderTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($actualUrl, $expectedUrl);
     }
 
-    function testGetOriginalUrlWithprefix()
+    public function testGetOriginalUrlWithprefix()
     {
         $expectedUrl = "http://www.example.com/somepath/x?prop=value";
 

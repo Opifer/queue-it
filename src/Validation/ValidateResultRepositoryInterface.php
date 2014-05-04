@@ -4,6 +4,6 @@ namespace Opifer\QueueIt\Validation;
 
 interface ValidateResultRepositoryInterface
 {
-	public function getValidationResult($queue);
-	public function setValidationResult($queue, $validationResult);
+    public function getValidationResult($queue);
+    public function setValidationResult($queue, $validationResult);
 }
